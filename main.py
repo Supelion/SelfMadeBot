@@ -6,13 +6,11 @@ ctypes.windll.kernel32.SetConsoleTitleW("Discord Bot Maker | Supelion")
 
 print("\n\n" + "-" * 10 + " Welcome to the Discord Bot Maker! " + "-" * 10)
 time.sleep(2)
-setupTipe = input("\n\nSelect a setup type (simple / advanced): ")
-setupType = setupTipe.lower()
+setupType = input("\n\nSelect a setup type (simple / advanced): ")
 
-if setupType == "simple":
+if setupType.lower() == "simple":
     # Asking the user for the discord bot token
-    discordBotToken = input("\nPlease input your discord bot token here: ")
-    botToken = str(discordBotToken)
+    botToken = input("\nPlease input your discord bot token here: ")
     # Asking the user for the command prefix (why are you even reading this lmao)
     commandPrefix = input("\nPlease enter the bot's prefix: ")
 
@@ -22,20 +20,20 @@ if setupType == "simple":
 from discord.ext import commands
 from datetime import datetime
 
-client = commands.Bot(command_prefix = '{commandPrefix}')
+bot = commands.Bot(command_prefix = '{commandPrefix}')
 
-@client.event
+@bot.event
 async def on_ready():
     print("I'm Online!")
 
-@client.command()
+@bot.command()
 async def hi(ctx):
     await ctx.send("Hello from the self made bot!")
 
-@client.command()
+@bot.command()
 async def ping(ctx):
     
-    ping = round(client.latency*1000)
+    ping = round(bot.latency * 1000)
     
     pingembed = discord.Embed(color = 0x2f3136)
     
@@ -43,7 +41,7 @@ async def ping(ctx):
     
     await ctx.reply(embed=pingembed, mention_author=False)
 """ + """
-@client.command()
+@bot.command()
 async def info(ctx):
     embed = discord.Embed(title=f"{ctx.guild.name}", timestamp=datetime.datetime.utcnow(), color=discord.Color.blue())
     embed.add_field(name="Server created at", value=f"{ctx.guild.created_at}")
@@ -55,27 +53,22 @@ async def info(ctx):
     await ctx.send(embed=embed)
 """ + f"""
 
-client.run('{botToken}')""")
-
-    # Closing the file
-    f.close()
+bot.run('{botToken}')""")
 
     # Success message and giving some info to the user.
     print("\n\nDone!")
 
-elif setupType == "advanced":
+elif setupType.lower() == "advanced":
     # Asking the user for the discord bot token
-    discordBotToken = input("\nPlease input your discord bot token here: ")
-    botToken = str(discordBotToken)
+    botToken = input("\nPlease input your discord bot token here: ")
     # Asking the user for the command prefix (why are you even reading this lmao)
     commandPrefix = input("\nPlease enter the bot's prefix: ")
     # Asking user if the command prefix should be case insensitive
-    caseSense = input("\nShould the Prefix be case insensitive? (yes or no) ")
-    isCaseSensitive = caseSense.lower()
+    case = input("\nShould the Prefix be case insensitive? (yes or no) ")
     # Checking the input of the user
-    if isCaseSensitive == "yes":
+    if case.lower() == "yes":
         case = True
-    elif isCaseSensitive == "no":
+    elif case.lower() == "no":
         case = False
     else:
         print("Please only enter yes or no!")
@@ -88,20 +81,20 @@ elif setupType == "advanced":
 from discord.ext import commands
 from datetime import datetime
 
-client = commands.Bot(command_prefix = '{commandPrefix}', case_insensitive = {case})
+bot = commands.Bot(command_prefix = '{commandPrefix}', case_insensitive = {case})
 
-@client.event
+@bot.event
 async def on_ready():
     print("I'm Online!")
 
-@client.command()
+@bot.command()
 async def hi(ctx):
     await ctx.send("{whatToSayToHiCommand}""" + f"""")
 
-@client.command()
+@bot.command()
 async def ping(ctx):
     
-    ping = round(client.latency*1000)
+    ping = round(bot.latency * 1000)
     
     pingembed = discord.Embed(color = 0x2f3136)
     
@@ -109,7 +102,7 @@ async def ping(ctx):
     
     await ctx.reply(embed=pingembed, mention_author=False)
 """ + """
-@client.command()
+@bot.command()
 async def info(ctx):
     embed = discord.Embed(title=f"{ctx.guild.name}", timestamp=datetime.datetime.utcnow(), color=discord.Color.blue())
     embed.add_field(name="Server created at", value=f"{ctx.guild.created_at}")
@@ -121,10 +114,7 @@ async def info(ctx):
     await ctx.send(embed=embed)
 """ + f"""
 
-client.run('{botToken}')""")
-
-    # Closing the file
-    f.close()
+bot.run('{botToken}')""")
 
     # Success message and giving some info to the user.
     print("\n\nDone!")
